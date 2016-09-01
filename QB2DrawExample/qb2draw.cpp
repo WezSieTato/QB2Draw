@@ -85,6 +85,18 @@ void QB2Draw::DrawTransform(const b2Transform &xf){
     painter->rotate(xf.q.GetAngle()*180.0/3.141628); //Rotate
 }
 
+void QB2Draw::DrawPoint(const b2Vec2 &p, float32 size, const b2Color &color)
+{
+    if (painter==NULL) return; //Check if painter is setted
+    QColor c=toQColor(color); //set color
+    //c.setAlpha(ALPHA); //set alpha
+    QPen pen;//Configure the pen
+    pen.setBrush(c); //Set the pen color
+    pen.setWidth(WIDTH); //Set pen width
+    painter->setPen(pen); //Assign the pen
+    painter->drawPoint(toQPoint(p));
+}
+
 QColor QB2Draw::toQColor(b2Color color){
     return QColor(color.r,color.g,color.b); //Convert color
 }

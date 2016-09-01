@@ -6,6 +6,10 @@
 
 QT       += core gui
 
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+include(Box2D/box2d.pri)
+
 TARGET = QB2DrawExample
 TEMPLATE = app
 
@@ -19,4 +23,3 @@ HEADERS  += mainwindow.h \
 
 FORMS    +=
 
-LIBS +=-lBox2D
