@@ -16,10 +16,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    qb2draw.cpp
+    ../qb2draw.cpp
 
 HEADERS  += mainwindow.h \
-    qb2draw.h
+    ../qb2draw.h
 
 FORMS    +=
 
