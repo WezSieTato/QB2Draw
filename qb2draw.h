@@ -22,6 +22,7 @@ public:
     QPoint toQPoint(const b2Vec2 &vec) const; //To convert b2vec2 in QPoint (and also change the coordinate system)
     b2Vec2 toB2Vec2(const QPointF &point) const;
     b2Vec2 toB2Vec2(const QPoint &point) const;
+    QColor toQColor(const b2Color &color) const; //To convert b2Color in QColor
 
     void setPtmRatio(float value);
     float getPtmRatio() const;
@@ -30,8 +31,6 @@ private:
     QPainter *painter; //The painter
     QRect geometry; //The geometry
     float ptmRatio;
-
-    QColor toQColor(b2Color color); //To convert b2Color in QColor
 
 public slots:
     void updateGeometry(QRect displayGeometry); //Update the geometry

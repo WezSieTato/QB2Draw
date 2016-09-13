@@ -93,7 +93,7 @@ void QB2Draw::DrawPoint(const b2Vec2 &p, float32 size, const b2Color &color)
     painter->drawPoint(toQPoint(p));
 }
 
-QColor QB2Draw::toQColor(b2Color color)
+QColor QB2Draw::toQColor(const b2Color &color) const
 {
     return QColor(color.r * 255, color.g * 255, color.b * 255, color.a * 255); //Convert color
 }
