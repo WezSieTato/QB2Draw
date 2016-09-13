@@ -3,8 +3,7 @@
 
 #include <QGraphicsScene>
 #include <Box2D/Box2D.h>
-
-#include "../qb2draw.h"
+#include <qb2draw.h>
 
 class PhysicsScene : public QGraphicsScene
 {

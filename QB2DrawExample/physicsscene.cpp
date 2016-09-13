@@ -62,5 +62,4 @@ void PhysicsScene::drawForeground(QPainter *painter, const QRectF &rect)
     painter->setRenderHint(QPainter::Antialiasing);
     draw->setPainter(painter); //Assign the painter at the drawer
     world->DrawDebugData(); //Draw world
-//    if (p.end()) e->accept(); //Close painter
 }

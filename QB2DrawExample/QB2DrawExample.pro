@@ -9,17 +9,16 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 include(Box2D/box2d.pri)
+include(../qb2draw.pri)
 
 TARGET = QB2DrawExample
 TEMPLATE = app
 
 SOURCES += main.cpp\
-    ../qb2draw.cpp \
     physicsscene.cpp \
     graphicsviewwindow.cpp
 
 HEADERS  += \
-    ../qb2draw.h \
     physicsscene.h \
     graphicsviewwindow.h
 
