@@ -1,15 +1,13 @@
-#include "mainwindow.h"
+#include "physicsscene.h"
+
 #include <QTimer>
 #include <QPaintEvent>
-MainWindow::MainWindow(QWidget *parent) :
-    QWidget(parent)
+
+PhysicsScene::PhysicsScene(QObject *parent) : QGraphicsScene(QRectF(0, 0, 700, 500), parent)
 {
-    this->setFixedSize(700,500);
-
-
     world=new b2World(b2Vec2(0,-100)); //b2World object
     world->SetContinuousPhysics(true); //Some flag
-    draw=new QB2Draw(this->geometry());//Create the drawer
+    draw=new QB2Draw(this->sceneRect().toAlignedRect());//Create the drawer
 
     uint32 flags = 0;//Set the flags
     flags += 1	* b2Draw::e_shapeBit;
@@ -19,8 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     world->SetDebugDraw(draw); //Set the drawer in the world
 
     QTimer *t=new QTimer(this); //Timer refresh
-    t->start(1.0/30.0*1000.0); //30fps
-    connect(t,SIGNAL(timeout()),this,SLOT(repaint()));//Repaint windows evry timer clock
+    connect(t,SIGNAL(timeout()),this,SLOT(updateLogic()));//Repaint windows evry timer clock
+    t->start(30); //30fps
 
     //Define some bodies
     b2BodyDef def;
@@ -35,7 +33,6 @@ MainWindow::MainWindow(QWidget *parent) :
     fd.restitution=0.5;
     fd.shape=&shape;
     body->CreateFixture(&fd);
-
 
     def.position.Set(100,300);
     b2Body* body3=world->CreateBody(&def);//Second circle
@@ -52,18 +49,18 @@ MainWindow::MainWindow(QWidget *parent) :
     b2DistanceJointDef jd;//Set up the joint
     jd.Initialize(body3,body,body3->GetPosition(),body->GetPosition());
     world->CreateJoint(&jd);
-
 }
 
-MainWindow::~MainWindow()
+void PhysicsScene::updateLogic()
 {
+    world->Step(1.0/30.0,10,10); //Update world
+    this->update();
 }
 
-void MainWindow::paintEvent(QPaintEvent *e){
-    QPainter p(this);//Create the painter
-    p.setRenderHint(QPainter::Antialiasing);
-    draw->setPainter(&p); //Assign the painter at the drawer
-    world->Step(1.0/30.0,10,10); //Update world
+void PhysicsScene::drawForeground(QPainter *painter, const QRectF &rect)
+{
+    painter->setRenderHint(QPainter::Antialiasing);
+    draw->setPainter(painter); //Assign the painter at the drawer
     world->DrawDebugData(); //Draw world
-    if (p.end()) e->accept(); //Close painter
+//    if (p.end()) e->accept(); //Close painter
 }

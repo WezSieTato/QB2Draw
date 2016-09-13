@@ -13,13 +13,16 @@ include(Box2D/box2d.pri)
 TARGET = QB2DrawExample
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    ../qb2draw.cpp
+    ../qb2draw.cpp \
+    physicsscene.cpp \
+    graphicsviewwindow.cpp
 
-HEADERS  += mainwindow.h \
-    ../qb2draw.h
+HEADERS  += \
+    ../qb2draw.h \
+    physicsscene.h \
+    graphicsviewwindow.h
 
-FORMS    +=
+FORMS    += \
+    graphicsviewwindow.ui
 
